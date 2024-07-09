@@ -11,5 +11,5 @@ pub use paths::Paths;
 pub use resize::{Resize, ResizeType, ResizeMethod};
 pub use format::{Format, Quality, Speed};
 pub use rotate::{Rotate, Angle};
-pub use sort::{Sort, SortType, SortOrder};
+pub use sort::{ SortType, SortOrder};
 pub use picture::Picture;

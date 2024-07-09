@@ -5,14 +5,14 @@ use crate::components::traits::ToHtml;
 pub fn Selectable<T : ToHtml + PartialEq + Clone + 'static>(options: T, label: &'static str, on_change: EventHandler<String>) -> Element{
    rsx!{
       div{
-         class: "flex justify-center align-center gap-2",
+         class: "flex justify-center align-center gap-2 py-4",
          label{
-             class: "py-4 h-fit text-sm font-medium dark:text-gray-400 text-center content-center w-full",
+             class: "h-fit text-sm font-medium dark:text-gray-400 text-center content-center w-full",
              {label}
          }
          select{
              onchange: move |evt| on_change.call(evt.value()),
-             class: "pt-4 pb-2 h-fit text-center text-sm text-gray-500 bg-transparent rounded-none appearance-none dark:text-gray-400 focus:outline-none focus:ring-0 peer",
+             class: "h-fit text-center text-sm text-gray-500 bg-transparent rounded-none appearance-none dark:text-gray-400 focus:outline-none focus:ring-0 peer",
              {options.to_html()}
          }
       }

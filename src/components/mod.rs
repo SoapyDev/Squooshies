@@ -4,6 +4,7 @@ mod file_selector;
 mod numbers;
 mod buttons;
 mod checkbox;
+mod pictures;
 
 pub use checkbox::Checkbox;
 pub use selects::Selectable;
@@ -13,3 +14,4 @@ pub use file_selector::FileSelector;
 pub use numbers::Numbers;
 pub use buttons::OrderByButton;
 pub use buttons::TransformButton;
+pub use pictures::Pictures;

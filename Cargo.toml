@@ -4,28 +4,27 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-dioxus = { version = "0.5", features = ["desktop"] }
-dioxus-desktop = "0.5"
+dioxus = { version = "0.5.1", features = ["desktop"] }
 dioxus-free-icons = { version = "0.8.6", features = ["font-awesome-regular", "font-awesome-solid"] }
+dioxus-logger = "0.5.1"
 manganis = "0.2"
 rayon = "1.1"
 rfd = "0.14"
-num_cpus = "1.16.0"
-
 
 image = "0.25"
 ravif = "0.11.8"
-rgb = "0.8.42"
+rgb = "0.8.44"
 webp = "0.3"
-dioxus-logger = "0.5.1"
 
 [package.metadata.bundle]
-name = "Picturust"
-identifier = "com.doe.exampleapplication"
+name = "Sqooshies"
+identifier = "com.sqooshies"
 icon = []
 version = "1.1.0"
-authors = []
+authors = [
+    "Alexandre Beauchamp-Thibault"
+]
 resources = []
-copyright = "Copyright (c) Jane Doe 2016. All rights reserved."
-category = "Developer Tool"
-short_description = "An example application."
+copyright = "Copyright (c) 2024 Alexandre Beauchamp-Thibault. All rights reserved."
+category = "Tools"
+short_description = "Sqooshies is a tool for optimizing images inspired by Squoosh, but with quantity in mind."

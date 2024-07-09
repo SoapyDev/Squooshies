@@ -19,7 +19,7 @@ pub fn OrderByButton(is_asc: bool, on_click: EventHandler<()>) -> Element {
     rsx!{
         button{
             onclick: move |_| on_click(()),
-            class: "p-4 mx-8 rounded-lg bg-transparent text-slate-400 hover:text-blue-500",
+            class: "p-4 h-fit mx-8 rounded-lg bg-transparent text-slate-400 hover:text-blue-500",
             if is_asc {
                 Icon{
                    width: 25,

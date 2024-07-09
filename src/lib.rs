@@ -2,7 +2,7 @@ use std::path::PathBuf;
 use dioxus::prelude::*;
 use image::ImageFormat;
 use manganis::mg;
-use crate::components::{Checkbox, FileSelector, Numbers, OrderByButton, TransformButton};
+use crate::components::{Checkbox, FileSelector, Numbers, OrderByButton, Pictures, TransformButton};
 use crate::components::{Selectable, SelectableSetting};
 use crate::app::{Application, SortType, SortOrder, ResizeType, ResizeMethod, Format, Quality, Speed, Rotate};
 
@@ -19,11 +19,11 @@ pub fn App() -> Element {
     rsx! {
         style{ "_TAILWIND_URL" }
         body{
-            class: "h-screen w-screen overflow-auto  p-0 m-0 flex bg-slate-950",
+            class: "h-screen w-screen overflow-hidden p-0 m-0 flex bg-slate-950",
             section{
-                class: "w-full min-w-96",
+                class: "w-full min-w-96 overflow-y-auto .overflow-performance relative",
                 header{
-                    class: "w-full h-16 py-4 px-8 flex justify-end align-center gap-8 sticky top-0 bg-slate-950",
+                    class: "w-full py-4 px-8 flex justify-end align-center gap-8 sticky top-0 left-0 bg-slate-950 z-20",
                     Checkbox{
                         is_checked: app.with(|a| a.is_all_selected()),
                         on_click: move |evt| {
@@ -52,64 +52,8 @@ pub fn App() -> Element {
                 },
                 div{
                     class: "w-full h-fit p-8 m-0 flex flex-row flex-wrap gap-16",
-                    for (index,  picture) in app().pictures.iter().enumerate(){
-                        figure{
-                            class: "w-80 h-full flex flex-col gap-8",
-                            div{
-                                class: "w-full h-full shadow-2xl drop-shadow-2xl shadow-slate-600 relative",
-                                onclick: move |_| {
-                                    let state = !app.with(|a| a.pictures[index].is_selected);
-                                    app.with_mut(|a| a.pictures[index].is_selected = state);
-                                },
-                                img{
-                                    src: picture.path.to_str().unwrap(),
-                                    loading: "lazy",
-                                    width: "320px",
-                                    height: "320px",
-                                    class: "w-80 h-80 object-cover object-center rounded-lg",
-                                }
-                                Checkbox{
-                                    is_checked: picture.is_selected,
-                                    on_click: move |evt| {
-                                        if evt{
-                                            app.with_mut(|a| a.pictures[index].is_selected = true);
-                                        }else{
-                                            app.with_mut(|a| a.pictures[index].is_selected = false);
-                                        }
-                                    }
-                                }
-                                div{
-                                    class: "w-full h-full absolute top-0 left-0 bg-black/40",
-                                    class: if picture.is_in_process {"z-10"} else {"hidden z-0"},
-                                    svg{
-                                        view_box: "0 0 800 800",
-                                        xmlns: "http://www.w3.org/2000/svg",
-                                        circle{
-                                            class: "animate-progress",
-                                            cx: "400",
-                                            cy: "400",
-                                            r: "200",
-                                            fill: "none",
-                                            stroke: "white",
-                                            stroke_dasharray: "250 1400",
-                                            stroke_width: "25",
-                                            stroke_linecap: "round"
-                                        }
-                                    }
-                                }
-                            }
-                            figcaption{
-                                class: "w-full p-4 text-center flex flex-col gap-2",
-                                div{
-                                    class: "w-full text-slate-400",
-                                    {picture.get_name()}
-                                }
-                                div{
-                                    class: "w-full text-slate-500",
-                                    {picture.get_weight()}
-                                }
-                            }
-                        }
+                    Pictures{
+                        app: app
                     }
                 }
             },

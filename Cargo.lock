@@ -3129,12 +3129,10 @@ name = "picturust-dx"
 version = "0.1.0"
 dependencies = [
  "dioxus",
- "dioxus-desktop",
  "dioxus-free-icons",
  "dioxus-logger",
  "image",
  "manganis",
- "num_cpus",
  "ravif",
  "rayon",
  "rfd",
@@ -3617,9 +3615,9 @@ dependencies = [
 
 [[package]]
 name = "rgb"
-version = "0.8.42"
+version = "0.8.44"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3eeba50c58624afb3be6d04abad8cb7a259d52017068c9f828975aa870a5daf5"
+checksum = "1aee83dc281d5a3200d37b299acd13b81066ea126a7f16f0eae70fc9aed241d9"
 dependencies = [
  "bytemuck",
 ]

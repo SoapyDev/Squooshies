@@ -1,5 +1,4 @@
 use std::path::{Path, PathBuf};
-use image::DynamicImage;
 use rayon::prelude::{IntoParallelRefMutIterator, ParallelIterator};
 
 use crate::app::format::Format;
