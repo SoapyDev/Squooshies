@@ -1,7 +1,7 @@
 [application]
 
 # App (Project) Name
-name = "file-explorer"
+name = "Squooshies"
 
 # Dioxus App Default Platform
 # desktop, web
@@ -31,7 +31,7 @@ watch_path = ["src", "assets"]
 
 # CSS style file
 
-style = []
+style = ["/src/output.css"]
 
 # Javascript code file
 script = []

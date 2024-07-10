@@ -1,7 +1,6 @@
 use std::path::PathBuf;
 use dioxus::prelude::*;
 use image::ImageFormat;
-use manganis::mg;
 use crate::components::{Checkbox, FileSelector, Numbers, OrderByButton, Pictures, TransformButton};
 use crate::components::{Selectable, SelectableSetting};
 use crate::app::{Application, SortType, SortOrder, ResizeType, ResizeMethod, Format, Quality, Speed, Rotate};
@@ -10,14 +9,13 @@ mod app;
 mod error;
 mod components;
 
-const _TAILWIND_URL: &str = mg!(file("./src/output.css"));
 
 #[component]
 pub fn App() -> Element {
 
     let mut app = use_signal(Application::default);
     rsx! {
-        style{ "_TAILWIND_URL" }
+        style{{include_str!("output.css")}}
         body{
             class: "h-screen w-screen overflow-hidden p-0 m-0 flex bg-slate-950",
             section{

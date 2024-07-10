@@ -1,5 +1,4 @@
 use std::path::PathBuf;
-use std::os::unix::prelude::MetadataExt;
 use std::path::Path;
 use std::time::SystemTime;
 use image::DynamicImage;
@@ -71,11 +70,26 @@ impl FileName{
             .join(&self.suffix)
     }
 }
+#[cfg(target_os = "linux")]
+use std::os::unix::prelude::MetadataExt;
 impl Metadata{
+
+    #[cfg(target_os = "linux")]
     pub fn new(path: &Path) -> Self {
         let metadata = path.metadata().unwrap();
         Self {
             weight: metadata.size(),
+            created: metadata.created().ok(),
+            modified: metadata.modified().ok(),
+            accessed: metadata.accessed().ok(),
+        }
+    }
+
+    #[cfg(target_os = "windows")]
+    pub fn new(path: &Path) -> Self {
+        let metadata = path.metadata().unwrap();
+        Self {
+            weight: metadata.len(),
             created: metadata.created().ok(),
             modified: metadata.modified().ok(),
             accessed: metadata.accessed().ok(),
