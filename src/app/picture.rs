@@ -25,6 +25,8 @@ pub struct FileName {
 #[derive(Clone, PartialEq, Debug, Default)]
 pub struct Metadata {
     pub weight: u64,
+    pub width: usize,
+    pub height: usize,
     pub created: Option<SystemTime>,
     pub modified: Option<SystemTime>,
     pub accessed: Option<SystemTime>,
@@ -37,8 +39,12 @@ impl Picture {
         let metadata = Metadata::new(&path);
         Self { path, name, metadata,  is_selected:  true, is_in_process: false, is_processed: false }
     }
-    pub fn get_name(& self) -> String {
-        self.name.source_name.to_string()
+    pub fn get_name(&self) -> String {
+        self.path.file_name().unwrap_or_default().to_str().unwrap_or_default().to_string()
+    }
+
+    pub fn get_size(&self) -> String{
+        format!("{}px - {}px", self.metadata.width, self.metadata.height)
     }
 
     pub fn get_weight(&self) -> String {
@@ -51,7 +57,7 @@ impl Picture {
             format!("{} B", weight)
         }
     }
-    
+
     pub fn get_path(&self) -> &str{
         self.path
             .to_str()
@@ -85,8 +91,11 @@ impl Metadata{
     #[cfg(target_os = "linux")]
     pub fn new(path: &Path) -> Self {
         let metadata = path.metadata().unwrap();
+        let (width, height) = get_image_size(path);
         Self {
             weight: metadata.size(),
+            width,
+            height,
             created: metadata.created().ok(),
             modified: metadata.modified().ok(),
             accessed: metadata.accessed().ok(),
@@ -96,8 +105,11 @@ impl Metadata{
     #[cfg(target_os = "windows")]
     pub fn new(path: &Path) -> Self {
         let metadata = path.metadata().unwrap();
+        let (width, height) = get_image_size(path);
         Self {
             weight: metadata.len(),
+            width,
+            height,
             created: metadata.created().ok(),
             modified: metadata.modified().ok(),
             accessed: metadata.accessed().ok(),
@@ -105,3 +117,9 @@ impl Metadata{
     }
 }
 
+fn get_image_size(path: &Path) -> (usize, usize){
+    match imagesize::size(path) {
+        Ok(size) => (size.width, size.height),
+        Err(_) => (0,0)
+    }
+}

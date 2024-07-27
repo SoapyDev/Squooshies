@@ -16,6 +16,7 @@ ravif = "0.11.9"
 rgb = "0.8.44"
 webp = "0.3"
 kamadak-exif = "0.5.5"
+imagesize = "0.13.0"
 
 
 [package.metadata.bundle]

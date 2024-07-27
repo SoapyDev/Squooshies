@@ -64,6 +64,8 @@ fn Picture(picture: Picture, index: usize, app: Signal<Application>) -> Element 
             figcaption { class: "w-full p-4 text-center flex flex-col gap-2",
                 div { class: "w-full text-slate-400", {picture.get_name()} }
                 div { class: "w-full text-slate-500", {picture.get_weight()} }
+                div { class: "w-full text-slate-500", {picture.get_size()} }
+
             }
         }
     }
