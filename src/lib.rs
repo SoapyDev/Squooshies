@@ -14,7 +14,7 @@ pub fn App() -> Element {
 
     let mut app = use_signal(Application::default);
     rsx! {
-        style{{include_str!("./output.css")}}
+        style{{include_str!("../public/output.css")}}
         body { class: "h-screen w-screen overflow-hidden p-0 m-0 flex bg-slate-950",
             section { class: "w-full min-w-96 overflow-y-auto .overflow-performance relative",
                 header { class: "w-full py-4 px-8 flex justify-end align-center gap-8 sticky top-0 left-0 bg-slate-950 z-20",
