@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 #[derive(Clone, PartialEq, Debug, Default)]
 pub struct Paths {
@@ -9,5 +9,9 @@ pub struct Paths {
 impl Paths{
     pub fn is_valid(&self) -> bool{
         self.source.is_dir() && self.destination.is_dir() 
+    }
+    
+    pub fn get_destination(&self)-> &Path{
+        self.destination.strip_prefix("C:\\").unwrap_or(&self.destination)
     }
 }

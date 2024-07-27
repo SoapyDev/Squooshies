@@ -56,7 +56,7 @@ impl Application{
         let resize = &self.resize;
         let rotate = &self.rotate;
         let format = &self.format;
-        let destination = &self.paths.destination.to_owned();
+        let destination = self.paths.get_destination();
         
         self.pictures.par_iter_mut().for_each(|picture| {
 
@@ -71,7 +71,7 @@ impl Application{
 
                 rotate.apply(&mut image, &self.paths.source);
 
-                let path = picture.name.build(&destination);
+                let path = picture.name.build(destination);
                 if let Err(e) = format.apply(&mut image, path) {
                     println!("Could not format : {}", picture.get_name());
                     println!("{}", e);

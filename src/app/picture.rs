@@ -77,7 +77,7 @@ impl FileName{
         Self{source_name : name.to_string(), prefix: String::new(), suffix: String::new()}
     }
     
-    pub fn build(&self, path: &PathBuf) -> PathBuf {
+    pub fn build(&self, path: &Path) -> PathBuf {
         path.to_owned()
             .join(&self.prefix)
             .join(&self.source_name)
