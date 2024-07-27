@@ -8,3 +8,17 @@
     backface-visibility: hidden;
     will-change: transform;
 }
+
+::-webkit-scrollbar {
+    width: 1rem;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgb(2 6 23);
+    padding: 0 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(71 85 105);
+    border-radius: 0.5rem;
+}
