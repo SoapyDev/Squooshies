@@ -1,3 +1,5 @@
+use std::fs::File;
+use std::io::BufReader;
 use std::path::PathBuf;
 use std::path::Path;
 use std::time::SystemTime;
@@ -27,6 +29,7 @@ pub struct Metadata {
     pub weight: u64,
     pub width: usize,
     pub height: usize,
+    pub rotation: Option<u32>,
     pub created: Option<SystemTime>,
     pub modified: Option<SystemTime>,
     pub accessed: Option<SystemTime>,
@@ -68,7 +71,7 @@ impl Picture {
 
 
     pub(crate) fn load(&self) -> Result<DynamicImage, TransformationError> {
-        image::open(self.path.clone()).map_err(|e| TransformationError::Image(e.to_string()))
+        image::open(self.path.to_str().unwrap_or_default()).map_err(|e| TransformationError::Image(e.to_string()))
     }
 }
 
@@ -86,6 +89,8 @@ impl FileName{
 }
 #[cfg(target_os = "linux")]
 use std::os::unix::prelude::MetadataExt;
+use exif::{Exif, In, Tag};
+
 impl Metadata{
 
     #[cfg(target_os = "linux")]
@@ -110,6 +115,7 @@ impl Metadata{
             weight: metadata.len(),
             width,
             height,
+            rotation: get_rotation_code(path),
             created: metadata.created().ok(),
             modified: metadata.modified().ok(),
             accessed: metadata.accessed().ok(),
@@ -121,5 +127,25 @@ fn get_image_size(path: &Path) -> (usize, usize){
     match imagesize::size(path) {
         Ok(size) => (size.width, size.height),
         Err(_) => (0,0)
+    }
+}
+fn get_rotation_code(path: &Path) -> Option<u32> {
+    let file = File::open(path).expect("Could not open file");
+    let mut bufreader = BufReader::new(file);
+    let exifreader = exif::Reader::new();
+    if let Ok(exif) = exifreader.read_from_container(&mut bufreader) {
+        return read_exif(exif);
+    }
+    None
+}
+
+fn read_exif(exif: Exif) -> Option<u32> {
+    let orientation = exif.get_field(Tag::Orientation, In::PRIMARY);
+    match orientation {
+        Some(orientation) => {
+            let orientation = orientation.value.get_uint(0).unwrap();
+            Some(orientation)
+        }
+        None => None,
     }
 }
