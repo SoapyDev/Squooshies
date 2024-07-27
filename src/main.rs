@@ -11,7 +11,7 @@ fn main() {
     LaunchBuilder::new()
         .with_cfg(
             Config::new()
-                .with_background_color((0,0,0,100))
+                .with_background_color((2, 6, 23,100))
                 .with_window(
                     WindowBuilder::new()
                         .with_always_on_top(false)
