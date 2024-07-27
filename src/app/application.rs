@@ -1,5 +1,5 @@
 use std::path::{Path, PathBuf};
-use rayon::prelude::{IntoParallelRefMutIterator, ParallelIterator};
+use rayon::prelude::{IntoParallelRefMutIterator, ParallelBridge, ParallelIterator};
 
 use crate::app::format::Format;
 use crate::app::paths::Paths;
@@ -86,13 +86,16 @@ impl Application{
         });
         
         Ok(())
-        
     }
+    
+
+    
     fn fetch_pictures(&mut self)-> Result<(), std::io::Error> {
         let path = &self.paths.source;
             
         let pictures = path
             .read_dir()?
+            .par_bridge()
             .filter_map(|result| if let Ok(val) = result {
                 let path = val.path();
                 if Self::is_image(&path) {

@@ -4,14 +4,14 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-dioxus = { version = "0.5.1", features = ["desktop"] }
+dioxus = { version = "0.5.6", features = ["desktop"] }
 dioxus-free-icons = { version = "0.8.6", features = ["font-awesome-regular", "font-awesome-solid"] }
 dioxus-logger = "0.5.1"
 rayon = "1.1"
 rfd = "0.14"
 
-image = "0.25"
-ravif = "0.11.8"
+image = "0.25.2"
+ravif = "0.11.9"
 rgb = "0.8.44"
 webp = "0.3"
 

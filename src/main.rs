@@ -1,3 +1,4 @@
+use dioxus::desktop::{Config, WindowBuilder};
 use dioxus::prelude::*;
 use picturust_dx::App;
 
@@ -7,5 +8,16 @@ mod app;
 
 fn main() {
 
-    launch(App);
+    LaunchBuilder::new()
+        .with_cfg(
+            Config::new()
+                .with_background_color((0,0,0,100))
+                .with_window(
+                    WindowBuilder::new()
+                        .with_always_on_top(false)
+                        .with_maximized(true)
+                )
+                .with_disable_context_menu(true)
+        )
+        .launch(App);
 }

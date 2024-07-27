@@ -4,6 +4,7 @@ use crate::components::Checkbox;
 
 #[component]
 pub fn Pictures(app: Signal<Application>) -> Element {
+    
     rsx!{
         for (index,  picture) in app().pictures.into_iter().enumerate(){
             Picture{
@@ -18,6 +19,7 @@ pub fn Pictures(app: Signal<Application>) -> Element {
 
 #[component]
 fn Picture(picture: Picture, index: usize, app: Signal<Application>) -> Element {
+    
     rsx! {
         figure{
             key: "{picture.path.to_str().unwrap_or_default()}",
@@ -29,7 +31,7 @@ fn Picture(picture: Picture, index: usize, app: Signal<Application>) -> Element 
                     app.with_mut(|a| a.pictures[index].is_selected = state);
                 },
                 img{
-                    src: picture.path.to_str().unwrap(),
+                    src: {picture.get_path()},
                     loading: "lazy",
                     width: "320px",
                     height: "320px",

@@ -3,7 +3,7 @@ use image::DynamicImage;
 use image::imageops::FilterType;
 use crate::components::ToHtml;
 
-#[derive(Clone, PartialEq, Default, Debug)]
+#[derive(Clone, PartialEq, Debug)]
 pub struct Resize {
     pub resize_type: Option<ResizeType>,
     pub method: ResizeMethod,
@@ -61,6 +61,17 @@ impl ToHtml for ResizeType{
                     {label}
                 }
             }
+        }
+    }
+}
+
+impl Default for Resize{
+    fn default() -> Self {
+        Self{
+            resize_type: None,
+            method: ResizeMethod::Lanczos3,
+            width: 250,
+            height: 250
         }
     }
 }

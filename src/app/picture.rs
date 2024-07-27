@@ -51,6 +51,14 @@ impl Picture {
             format!("{} B", weight)
         }
     }
+    
+    pub fn get_path(&self) -> &str{
+        self.path
+            .to_str()
+            .unwrap_or_default()
+            .strip_prefix("C:\\")
+            .unwrap_or(self.path.to_str().unwrap_or_default())
+    }
 
 
     pub(crate) fn load(&self) -> Result<DynamicImage, TransformationError> {
