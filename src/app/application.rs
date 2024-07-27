@@ -69,7 +69,7 @@ impl Application{
             if let Ok(mut image) = picture.load() {
                 resize.apply(&mut image);
 
-                rotate.apply(&mut image);
+                rotate.apply(&mut image, &self.paths.source);
 
                 let path = picture.name.build(&destination);
                 if let Err(e) = format.apply(&mut image, path) {
