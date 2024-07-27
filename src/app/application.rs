@@ -110,7 +110,7 @@ impl Application{
         Ok(())
     }
     fn is_image(path: &Path) -> bool {
-        path.extension().map(|ext| ext == "jpg" || ext == "png" || ext == "jpeg" || ext == "webp" || ext == "avif").unwrap_or(false)
+        path.extension().map(|ext| ext == "jpg" || ext == "png" || ext == "jpeg" || ext == "webp" || ext == "avif" || ext == "tiff").unwrap_or(false)
     }
     
     pub fn select_all(&mut self){

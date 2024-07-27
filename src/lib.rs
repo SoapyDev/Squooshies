@@ -37,7 +37,7 @@ pub fn App() -> Element {
                         }
                     }
                     OrderByButton {
-                        is_asc: app.with(|p| p.sort.order == SortOrder::Asc),
+                        is_asc: app.with(|a| a.sort.order == SortOrder::Asc),
                         on_click: move |_| {
                             app.with_mut(|a| a.sort.set_order());
                             app.with_mut(|a| a.sort_pictures());
