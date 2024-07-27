@@ -17,11 +17,8 @@ const OPTIONS: [(&str, &str); 6] = [("none", "No reformating"),("png", "PNG"), (
 impl ToHtml for ImageFormat{
     fn to_html(&self) -> Element {
         rsx!{
-            for (value, label) in OPTIONS {
-                option{
-                    value: value,
-                    {label}
-                }
+            for (value , label) in OPTIONS {
+                option { value, {label} }
             }
         }
     }

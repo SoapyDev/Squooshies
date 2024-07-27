@@ -55,11 +55,8 @@ const RESIZE_TYPES: [(&str, &str); 3] = [("exact", "Exact"), ("fill", "Fill"), (
 impl ToHtml for ResizeType{
     fn to_html(&self) -> Element {
         rsx!{
-            for (value, label) in RESIZE_TYPES.iter() {
-                option{
-                    value: "{value}",
-                    {label}
-                }
+            for (value , label) in RESIZE_TYPES.iter() {
+                option { value: "{value}", {label} }
             }
         }
     }
@@ -104,11 +101,8 @@ const RESIZE_METHODS: [(&str, &str); 5] = [("lanczos3", "Lanczos3"), ("nearest",
 impl ToHtml for ResizeMethod{
     fn to_html(&self) -> Element {
         rsx!{
-            for (value, label) in RESIZE_METHODS.iter() {
-                option{
-                    value: "{value}",
-                    {label}
-                }
+            for (value , label) in RESIZE_METHODS.iter() {
+                option { value: "{value}", {label} }
             }
         }
     }

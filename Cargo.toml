@@ -7,6 +7,7 @@ edition = "2021"
 dioxus = { version = "0.5.6", features = ["desktop"] }
 dioxus-free-icons = { version = "0.8.6", features = ["font-awesome-regular", "font-awesome-solid"] }
 dioxus-logger = "0.5.1"
+manganis = "0.2.2"
 rayon = "1.1"
 rfd = "0.14"
 

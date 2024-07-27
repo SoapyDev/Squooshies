@@ -11,8 +11,7 @@ default_platform = "desktop"
 out_dir = "dist"
 
 # assets file folder
-asset_dir = "assets"
-
+asset_dir = "public"
 [web.app]
 
 # HTML title tag content
@@ -24,14 +23,14 @@ title = "file-explorer"
 reload_html = true
 
 # which files or dirs will be watcher monitoring
-watch_path = ["src", "assets"]
+watch_path = ["src", "public"]
 
 # include `assets` in web platform
 [web.resource]
 
 # CSS style file
 
-style = ["/src/output.css"]
+style = ["src/output.css"]
 
 # Javascript code file
 script = []

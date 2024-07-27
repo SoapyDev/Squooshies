@@ -58,11 +58,8 @@ const SORT_TYPE : [(&str, &str); 5] = [("Name", "name"), ("Weight", "weight"), (
 impl ToHtml for SortType {
     fn to_html(&self) -> Element {
         rsx!{
-            for (value, label) in SORT_TYPE.iter() {
-                option{
-                    value: "{value}",
-                    {label}
-                }
+            for (value , label) in SORT_TYPE.iter() {
+                option { value: "{value}", {label} }
             }
         }
     }
