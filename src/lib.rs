@@ -13,12 +13,7 @@ mod components;
 pub fn App() -> Element {
 
     let mut app = use_signal(Application::default);
-    let mut transform = use_future(move || async move {
-        if !app().paths.is_valid() {
-            return;
-        }
-        app().transform().await.expect("Could not transform pictures");
-    });
+
     
     rsx! {
         style{{include_str!("../public/output.css")}}
@@ -187,7 +182,12 @@ pub fn App() -> Element {
                 TransformButton {
                     is_disabled: app.with(|a| !a.paths.is_valid()),
                     on_click: move |_| {
-                        transform.restart();
+                        let mut app = app();
+                        spawn(async{
+                          let _ = tokio::task::spawn(async move{
+                                app.transform().await.expect("Could not transform pictures");
+                            }).await;
+                        });
                     }
                 }
             }
