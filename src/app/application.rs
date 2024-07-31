@@ -52,7 +52,7 @@ impl Application{
         }
     }
     
-    pub fn transform(&mut self) -> Result<(), std::io::Error> {
+    pub async fn transform(&mut self) -> Result<(), std::io::Error> {
         let resize = &self.resize;
         let rotate = &self.rotate;
         let format = &self.format;
