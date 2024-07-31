@@ -100,7 +100,8 @@ impl Metadata{
         Self {
             weight: metadata.size(),
             width,
-            height,
+            height, 
+            rotation: get_rotation_code(path),
             created: metadata.created().ok(),
             modified: metadata.modified().ok(),
             accessed: metadata.accessed().ok(),

@@ -16,7 +16,7 @@ pub fn App() -> Element {
     rsx! {
         style{{include_str!("../public/output.css")}}
             body { class: "dark h-screen w-screen overflow-hidden p-0 m-0 flex bg-slate-950",
-            section { class: "w-full min-w-96 overflow-y-auto .overflow-performance relative",
+            section { class: "w-full min-w-96 overflow-y-auto overflow-performance relative",
                 header { class: "w-full py-4 px-8 flex justify-end align-center gap-8 sticky top-0 left-0 bg-slate-950 z-20",
                     Checkbox {
                         is_checked: app.with(|a| a.is_all_selected()),
@@ -48,7 +48,7 @@ pub fn App() -> Element {
                     Pictures { app }
                 }
             }
-            section { class: "w-1/4 h-screen p-8 m-0 sticky top-0 bg-gray-900 overflow-y-auto",
+            section { class: "w-1/4 min-w-96 h-screen p-8 m-0 sticky top-0 bg-gray-900 overflow-y-auto",
                 FileSelector {
                     value: app.with(|a| a.paths.source.clone()),
                     label: "Source path",

@@ -41,25 +41,6 @@ fn Picture(picture: Picture, index: usize, app: Signal<Application>) -> Element 
                         }
                     }
                 }
-                div {
-                    class: "w-full h-full absolute top-0 left-0 bg-black/40",
-                    class: if picture.is_in_process { "z-10" } else { "hidden z-0" },
-                    svg {
-                        view_box: "0 0 800 800",
-                        xmlns: "http://www.w3.org/2000/svg",
-                        circle {
-                            class: "animate-progress",
-                            cx: "400",
-                            cy: "400",
-                            r: "200",
-                            fill: "none",
-                            stroke: "white",
-                            stroke_dasharray: "250 1400",
-                            stroke_width: "25",
-                            stroke_linecap: "round"
-                        }
-                    }
-                }
             }
             figcaption { class: "w-full p-4 text-center flex flex-col gap-2",
                 div { class: "w-full text-slate-400", {picture.get_name()} }
