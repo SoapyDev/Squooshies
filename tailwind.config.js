@@ -1,4 +1,5 @@
 module.exports = {
+  darkMode: "selector",
   mode: "all",
   content: [
     // include all rust, html and css files in the src directory
