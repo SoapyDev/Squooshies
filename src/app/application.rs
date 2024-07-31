@@ -7,6 +7,7 @@ use crate::app::picture::Picture;
 use crate::app::resize::Resize;
 use crate::app::rotate::Rotate;
 use crate::app::sort::Sort;
+use crate::error::TransformationError;
 
 #[derive(Clone, PartialEq, Debug)]
 pub struct Application {
@@ -15,7 +16,10 @@ pub struct Application {
     pub format: Format,
     pub rotate: Rotate,
     pub sort: Sort,
-    pub pictures: Vec<Picture>
+    pub pictures: Vec<Picture>,
+    pub errors: Vec<TransformationError>,
+    pub is_in_process: bool,
+    pub is_processed: bool,
 }
 
 impl Default for Application{
@@ -27,6 +31,9 @@ impl Default for Application{
            rotate: Rotate::default(),
            sort: Sort::default(),
            pictures: Vec::new(),
+           errors: Vec::new(),
+           is_in_process: false,
+           is_processed: false,
        } 
     }
 }

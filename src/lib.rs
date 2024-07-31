@@ -180,13 +180,18 @@ pub fn App() -> Element {
                     }
                 }
                 TransformButton {
-                    is_disabled: app.with(|a| !a.paths.is_valid()),
+                    is_disabled: app.with(|a| !a.paths.is_valid()) || app.with(|a| a.is_in_process),
                     on_click: move |_| {
-                        let mut app = app();
-                        spawn(async{
-                          let _ = tokio::task::spawn(async move{
-                                app.transform().await.expect("Could not transform pictures");
+                        let mut _app = app();
+                        spawn(async move {
+                            app.with_mut(|a| a.is_in_process = true);
+                            
+                            let _ = tokio::task::spawn(async move{
+                                _app.transform().await.expect("Could not transform pictures");
                             }).await;
+                            
+                            app.with_mut(|a| a.is_in_process = false);
+                            app.with_mut(|a| a.is_processed = true);
                         });
                     }
                 }
