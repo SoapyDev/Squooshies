@@ -145,8 +145,7 @@ pub fn App() -> Element {
                 if app.with(|a| {
                     a.format.image == Some(ImageFormat::Avif)
                         || a.format.image == Some(ImageFormat::WebP)
-                })
-                {
+                }) {
                     div {
                         label { class: "w-full p-4 text-slate-200 my-4",
                             {format!("Quality : {}", app.with(|a| a.format.quality.value))}
@@ -163,7 +162,8 @@ pub fn App() -> Element {
                             }
                         }
                     }
-
+                }
+                if app.with(|a| a.format.image == Some(ImageFormat::Avif)) {
                     div {
                         label { class: "w-full p-4 text-slate-200 my-4",
                             {format!("Speed : {}", app.with(|a| a.format.speed.value))}
