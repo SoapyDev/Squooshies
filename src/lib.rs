@@ -23,11 +23,13 @@ pub fn App() -> Element {
                     Checkbox {
                         is_checked: app.with(|a| a.is_all_selected()),
                         on_click: move |evt| {
-                            if evt {
-                                app.with_mut(|a| a.select_all())
-                            } else {
-                                app.with_mut(|a| a.unselect_all())
-                            }
+                            spawn(async move{
+                                if evt {
+                                    app.with_mut(|a| a.select_all())
+                                } else {
+                                    app.with_mut(|a| a.unselect_all())
+                                }
+                            });
                         }
                     }
                     Selectable {
@@ -35,14 +37,18 @@ pub fn App() -> Element {
                         label: "Sort by : ",
                         on_change: move |evt| {
                             app.with_mut(|a| a.sort.set_field(evt));
-                            app.with_mut(|a| a.sort_pictures());
+                            spawn(async move {
+                                app.with_mut(|a| a.sort_pictures());
+                            });
                         }
                     }
                     OrderByButton {
                         is_asc: app.with(|a| a.sort.order == SortOrder::Asc),
                         on_click: move |_| {
                             app.with_mut(|a| a.sort.set_order());
-                            app.with_mut(|a| a.sort_pictures());
+                            spawn(async move {
+                                app.with_mut(|a| a.sort_pictures());
+                            });
                         }
                     }
                 }
@@ -59,12 +65,16 @@ pub fn App() -> Element {
                             .set_title("Select a source directory")
                             .set_directory(".")
                             .pick_folder();
-                        app.with_mut(|a| a.set_source_path(files));
+                        spawn(async move {
+                            app.with_mut(|a| a.set_source_path(files));
+                        });
                     },
                     on_change: move |evt| {
                         let path = PathBuf::from(evt);
                         if path.is_dir() {
-                            app.with_mut(|a| a.set_source_path(Some(path)));
+                            spawn(async move {
+                                app.with_mut(|a| a.set_source_path(Some(path)));
+                            });
                         }
                     }
                 }
