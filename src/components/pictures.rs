@@ -46,7 +46,6 @@ fn Picture(picture: Picture, index: usize, app: Signal<Application>) -> Element 
                 div { class: "w-full text-slate-400", {picture.get_name()} }
                 div { class: "w-full text-slate-500", {picture.get_weight()} }
                 div { class: "w-full text-slate-500", {picture.get_size()} }
-
             }
         }
     }

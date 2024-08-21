@@ -18,7 +18,7 @@ impl ToHtml for ImageFormat{
     fn to_html(&self) -> Element {
         rsx!{
             for (value , label) in OPTIONS {
-                option {value, {label} }
+                option { value, {label} }
             }
         }
     }

@@ -1,12 +1,11 @@
-use std::path::PathBuf;
 use dioxus::prelude::*;
-use dioxus_free_icons::Icon;
 use dioxus_free_icons::icons::fa_solid_icons::FaFolderPlus;
+use dioxus_free_icons::Icon;
+use std::path::PathBuf;
 
 #[component]
 pub fn FileSelector(label: &'static str, value: PathBuf, on_change: EventHandler<String>, on_click: EventHandler<()>) -> Element {
-
-    rsx!{
+    rsx! {
         div { class: "w-full my-8 flex flex-row flex-nowrap border border-slate-700 rounded-lg hover:border-blue-500 has-[:focus]:border-blue-500 transition-colors duration-250 ease-in-out",
             button {
                 class: "text-slate-200 p-4 bg-gray-900 rounded-l-lg hover:text-blue-500 focus:outline-none focus:ring-0 transition-all duration-250 ease-in-out",
