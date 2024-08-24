@@ -4,20 +4,20 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-dioxus = { version = "0.5.6", features = ["desktop"] }
-dioxus-free-icons = { version = "0.8.6", features = ["font-awesome-regular", "font-awesome-solid"] }
+dioxus = { version = "0.5.6", default-features = false, features = ["desktop"] }
+dioxus-free-icons = { version = "0.8.6", default-features = false, features = ["font-awesome-regular", "font-awesome-solid"] }
 dioxus-logger = "0.5.1"
 manganis = "0.2.2"
 rayon = "1.1"
 rfd = "0.14"
 
 image = "0.25.2"
-ravif = "0.11.9"
+ravif = "0.11.10"
 rgb = "0.8.44"
 webp = "0.3"
 kamadak-exif = "0.5.5"
 imagesize = "0.13.0"
-tokio = "1.39.3"
+tokio = { version = "1.39.3", default-features = false, features = ["rt-multi-thread"] }
 
 
 [package.metadata.bundle]
